@@ -1,4 +1,5 @@
 using namespace std;
+#include <iostream>
 
 long long solution(int price, int money, int count)
 {
