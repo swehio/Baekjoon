@@ -32,12 +32,8 @@ pair<int, int> moveVirtex(char dir, const pair<int, int>& position)
 }
 
 int solution(string dirs) {
-    //set<pair<int, int>> virtex;
     set<set<pair<int, int>>> lines;
     pair<int, int> currentPosition = {0, 0};
-    //virtex.insert(currentPosition);
-    
-    //bool lineConnect = false;
     
     for(char dir : dirs)
     {
@@ -50,14 +46,7 @@ int solution(string dirs) {
         line.insert(currentPosition);
         line.insert(newPosition);
         lines.insert(line);
-        //auto it = find(virtex.begin(), virtex.end(), newPosition);
-        
-        // if(it != virtex.end() && !lineConnect)
-        // {
-        //     lineConnect = true;
-        // }
         currentPosition = newPosition;
-        //virtex.insert(currentPosition);
     }
     
     int length = lines.size();
