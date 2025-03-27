@@ -1,39 +1,48 @@
 #include <string>
 #include <vector>
+#include <queue>
 #include <algorithm>
 #include <iostream>
 
 using namespace std;
 
 string solution(vector<string> cards1, vector<string> cards2, vector<string> goal) {
-    string answer = "";
-    vector<string> goalCopy = goal;
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    while(true){
-        if(k == goal.size()){
-            answer = "Yes";
-            break;
-        }
-        if(goalCopy[k] == cards1[i]){
-            ++i;
-        }
-        else{
-            if(goalCopy[k] == cards2[j]){
-                ++j;
-            }
-            else{
-                answer = "No";
-                break;
-            }
-        }
-        ++k;
-        
-
-        
-        
+    queue<string> qCards1;
+    queue<string> qCards2;
+    queue<string> qgoal;
+    
+    for(string& card : cards1)
+    {
+        qCards1.push(card);
     }
     
-    return answer;
+    for(string& card : cards2)
+    {
+        qCards2.push(card);
+    }
+        for(string& sgaol : goal)
+    {
+        qgoal.push(sgaol);
+    }
+    
+    while(!qgoal.empty())
+    {
+        if(qgoal.front() == qCards1.front())
+        {
+            qgoal.pop();
+            qCards1.pop();
+        }
+        else if(qgoal.front() == qCards2.front())
+        {
+            qgoal.pop();
+            qCards2.pop();
+        }
+        else
+        {
+            return "No";
+        }
+           
+    }
+    
+    return "Yes";
 }
