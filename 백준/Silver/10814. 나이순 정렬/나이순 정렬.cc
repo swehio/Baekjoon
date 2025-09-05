@@ -11,31 +11,21 @@ int main()
     int n;
     cin >> n;
     
-    vector<tuple<int, int, string>> v;
+    vector<pair<int, string>> v;
     
-    for(int i = 0; i<n; i++)
+    while(n--)
     {
         int old;
         string name;
         cin >> old >> name;
         
-        v.push_back({old, i, name});
+        v.push_back({old, name});
     }
     
-    sort(v.begin(), v.end(), [](tuple<int, int, string>& a, tuple<int, int, string>& b){
-        int aOld, aIdx, bOld, bIdx;
-        string aName, bName;
-        tie(aOld, aIdx, aName) = a;
-        tie(bOld, bIdx, bName) = b;
-        if(aOld == bOld) return aIdx < bIdx;
-        return aOld < bOld;
-    });
+    stable_sort(v.begin(), v.end(), [](pair<int, string> a, pair<int, string> b) { return a.first < b.first; });
     
     for(auto info : v)
     {
-        int Old, Idx;
-        string Name;
-        tie(Old, Idx, Name) = info;
-        cout << Old << ' ' <<  Name <<'\n';
+        cout << info.first << ' ' << info.second <<'\n';
     }
 }
