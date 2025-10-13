@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int cnt;
 
-int isPrime(int k)
+bool isPrime(int k)
 {
-    if(k==1) return 0;
-    if(k==2) return 1;
-    for(int i=2; i*i <= k; i++)
+    if(k==1) return false;
+    for(int i=2; i*i<=k; i++)
     {
-        if(k % i == 0) return 0;
+        if(k % i == 0) return false;
     }
-    return 1;
+    return true;
 }
 
 int main()
@@ -26,8 +26,7 @@ int main()
     {
         int num;
         cin >> num;
-        cnt += isPrime(num);
+        cnt+=isPrime(num);
     }
-
     cout << cnt;
 }
