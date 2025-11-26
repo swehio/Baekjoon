@@ -12,7 +12,7 @@ int main()
     cin >> n >> m;
 
     long long reset = 0;
-    for(int i=0; i<20; i++) reset += (1ll<<i);
+    for(int i=0; i<20; i++) reset += (1<<i);
 
     for(int i=0; i<m; i++)
     {
