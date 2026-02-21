@@ -1,38 +1,38 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
-int n, m;  
-bool num[10];
+int a[10];
+bool vis[10];
+int n, m;
 
-void solve(int k, vector<int>& st)
+void solve(int depth)
 {
-    if(k==m)
+    if(depth == m)
     {
-        for(int l : st) cout << l << ' ';
+        for(int i=1; i<=m; i++)
+        {
+            cout << a[i] << ' ';
+        }
         cout << '\n';
     }
 
-    vector<int> list = st;
-
-    for(int i=0; i<n; i++)
+    for(int i=1; i<=n; i++)
     {
-        if(num[i+1]) continue;
-        num[i+1] = true;
-        list.push_back(i+1);
-        solve(k+1, list);
-        num[i+1] = false;
-        list.pop_back();
+        if(vis[i]) continue;
+        a[depth+1] = i;
+        vis[i] = 1;     
+        solve(depth+1);
+        vis[i] = 0;
     }
 }
- 
+
 int main()
 {
     ios::sync_with_stdio(0);
-    cin.tie(0);
+    cin.tie(0); 
 
     cin >> n >> m;
 
-    vector<int> st;
+    solve(0);
 
-    solve(0, st);
 }
