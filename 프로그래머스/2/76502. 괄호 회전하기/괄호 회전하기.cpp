@@ -1,60 +1,39 @@
-#include <string>
-#include <vector>
-#include <stack>
-#include <iostream>
+#include <bits/stdc++.h> 
 
-using namespace std;
+using namespace std; 
 
-int IsRight(const string& str)
+bool checkP(char a, char b)
 {
-    stack<char> st;
-    for(char ch : str)
-    {
-        if(!st.empty())
-        {
-            if(ch == ')')
-            {
-                if(st.top()=='(')
-                {
-                    st.pop();
-                    continue;
-                }
-            }
-            else if(ch == '}')
-            {
-                if(st.top()=='{')
-                {
-                    st.pop();
-                    continue;
-                }
-            }
-            else if(ch == ']')
-            {
-                if(st.top()=='[')
-                {
-                    st.pop();
-                    continue;
-                }
-            }
-        }
-
-        st.push(ch);
-    }
+    if(a=='['&&b==']') return true;
+    if(a=='('&&b==')') return true;
+    if(a=='{'&&b=='}') return true;
     
-    return st.empty() ? 1 : 0;
+    return false;
 }
 
-int solution(string s) {
-    int answer = 0;
+
+bool check(string& s)
+{
+    stack<char> st;
     
-    for(int i = 0; i<s.size(); i++)
+    for(char ch : s)
+    {  
+        if(!st.empty()&&checkP(st.top(), ch)) st.pop();  
+        else st.push(ch);  
+    }  
+    
+    return st.empty();
+}
+
+int cnt;
+
+int solution(string s) {   
+    int size = s.size();
+    
+    for(int i=0; i<size; i++)
     {
-        string news ="";
-        for(int j =0; j<s.size();j++)
-        {
-            news+= s[(i+j)%s.size()];
-        }
-        answer += IsRight(news);
-    }
-    return answer;
+        rotate(s.begin(), s.begin()+1, s.end());
+        if(check(s)) cnt++;
+    } 
+    return cnt;
 }
