@@ -1,8 +1,8 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std; 
 
-string board[102];
-int dis[102][102];
+string board[105];
+int dis[105][105];
 
 int dx[] = {1, -1, 0, 0};
 int dy[] = {0, 0, 1, -1};
@@ -10,10 +10,10 @@ int dy[] = {0, 0, 1, -1};
 int main()
 {
     ios::sync_with_stdio(0);
-    cin.tie(0); 
+    cin.tie(0);
 
     int n, m;
-    cin >> n >> m;
+    cin>>n>>m;
 
     for(int i=0; i<n; i++)
     {
@@ -23,6 +23,7 @@ int main()
     queue<pair<int, int>> q;
     q.push({0, 0});
     dis[0][0] = 1;
+
 
     while(!q.empty())
     {
@@ -34,12 +35,11 @@ int main()
             int ny = cur.second + dy[i];
 
             if(nx<0||nx>=n||ny<0||ny>=m) continue;
-            if(dis[nx][ny]!=0||board[nx][ny]=='0')continue;
+            if(board[nx][ny]=='0'||dis[nx][ny]!=0)continue;
 
             dis[nx][ny] = dis[cur.first][cur.second]+1;
             q.push({nx, ny});
         }
     } 
-
     cout << dis[n-1][m-1];
 }
